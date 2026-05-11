@@ -132,6 +132,9 @@ A computational artifact is correct when:
 - **English naming** - Functions, variables, classes in English
 - **Lints required** - Run project linters before considering done
 - **No lint disables** - Fix root cause, don't suppress
+- **No hacks** - If a feature requires a hack, workaround, or monkey patch, stop. Fix the root cause properly or be honest that the task cannot be completed without compromising quality.
+- **No partial solutions** - Do not commit code that could break things later or that only works coincidentally.
+- **No backwards compatibility bias** - Fix poorly designed APIs or behaviors properly rather than preserving a flawed design. Correctness over compatibility.
 
 ---
 
@@ -151,7 +154,7 @@ A computational artifact is correct when:
 
 | Level | Description |
 |-------|-------------|
-| 🔴 Critical | Security vulnerability, data loss, breakage, incorrect results |
+| 🔴 Critical | Security vulnerability, data loss, breakage, incorrect results, hack or workaround introduced |
 | 🟠 High | Performance issue, maintainability blocker, type unsafety |
 | 🟡 Medium | Code smell, improvement opportunity |
 | 🟢 Low | Style preference, nitpick |
@@ -166,6 +169,8 @@ A computational artifact is correct when:
 - Suggestion: ...
 ```
 
+After every audit, explicitly flag any finding that represents a fragile hack or a partial solution — even if it is currently passing tests.
+
 ---
 
 ## Red Flags
@@ -179,6 +184,9 @@ Identify these indicators of poor design:
 - **Information leakage** - Design decisions exposed at module boundary
 - **Special-purpose classes** - Over-specialized, hard to reuse
 - **Redundant code** - Duplication that could be abstracted
+- **Hacks & workarounds** - Local fixes that paper over deeper issues instead of addressing the root cause
+- **Partial solutions** - Incomplete implementations that pass happy-path but break edge cases
+- **Coincidental correctness** - Code that works for the wrong reasons; fragile under change
 
 ---
 
